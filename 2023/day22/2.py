@@ -88,7 +88,6 @@ for brick in cubes:
                     supportedby[brick].add(space[x][y][z - 1])
                     supportsfor[space[x][y][z - 1]].add(brick)
 
-
 ans = 0
 for brick in supportsfor:
     tofall = supportsfor[brick].copy()

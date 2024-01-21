@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,9 +26,12 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     vi a;
     vi b;
@@ -35,34 +39,33 @@ int solve() {
     ll ans = 0;
 
     if (input.is_open()) {
-label:
+        label:
 
-        while ( getline (input, line) ) {
-            stringstream words (line);
+        while (getline(input, line)) {
+            stringstream words(line);
             string word;
             a.clear();
             b.clear();
             first.clear();
 
-            while (getline (words, word, ' ')) {
-                a.pb (stoi (word));
+            while (getline(words, word, ' ')) {
+                a.pb(stoi(word));
             }
 
-            bool done = true;
             bool flag = true;
             first.clear();
 
-            while (done) {
+            while (true) {
                 if (flag) {
                     for (size_t i = 0; i < a.size() - 1; i++) {
-                        b.pb (a[i + 1] - a[i]);
+                        b.pb(a[i + 1] - a[i]);
                     }
 
-                    first.pb (a[0]);
+                    first.pb(a[0]);
                     a.clear();
                     flag = false;
 
-                    if (b == vi (b.size(), 0)) {
+                    if (b == vi(b.size(), 0)) {
                         ll sum = 0;
 
                         for (size_t j = 0; j < first.size(); j++) {
@@ -78,14 +81,14 @@ label:
                     }
                 } else {
                     for (size_t i = 0; i < b.size() - 1; i++) {
-                        a.pb (b[i + 1] - b[i]);
+                        a.pb(b[i + 1] - b[i]);
                     }
 
-                    first.pb (b[0]);
+                    first.pb(b[0]);
                     b.clear();
                     flag = true;
 
-                    if (a == vi (a.size(), 0)) {
+                    if (a == vi(a.size(), 0)) {
                         ll sum = 0;
 
                         for (size_t j = 0; j < first.size(); j++) {
@@ -111,7 +114,7 @@ label:
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

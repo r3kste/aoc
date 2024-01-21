@@ -1,4 +1,5 @@
-import sympy, os
+import os
+import sympy
 
 hailstones = [
     tuple(map(int, line.replace("@", ",").split(",")))

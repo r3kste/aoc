@@ -37,7 +37,6 @@ for i in range(n):
 
 distance = {point: {} for point in poi}
 
-
 for si, sj in poi:
     todo = [(int(0), si, sj)]
     seen = {(si, sj)}
@@ -52,10 +51,10 @@ for si, sj in poi:
             ni = i + di
             nj = j + dj
             if (
-                ni in range(0, n)
-                and nj in range(0, n)
-                and (ni, nj) not in seen
-                and grid[ni][nj] != "#"
+                    ni in range(0, n)
+                    and nj in range(0, n)
+                    and (ni, nj) not in seen
+                    and grid[ni][nj] != "#"
             ):
                 todo.append((dist + 1, ni, nj))
                 seen.add((ni, nj))

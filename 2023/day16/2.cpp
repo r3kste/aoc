@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,130 +26,135 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int n = 110;
-vector<vector<char>> inp (n, vector<char> (n, '.'));
-vector<vector<bool>> ene (n, vector<bool> (n, false));
+vector<vector<char>> inp(n, vector<char>(n, '.'));
+vector<vector<bool>> ene(n, vector<bool>(n, false));
 map<pair<char, pair<int, int>>, bool> p;
+
 void reset() {
-    ene = vector<vector<bool>> (n, vector<bool> (n, false));
+    ene = vector<vector<bool>>(n, vector<bool>(n, false));
     p.clear();
 }
 
-void traverse (char facing, int i, int j) {
-    if (! (i < 0 || i > n - 1 || j < 0 || j > n - 1)) {
-        p[mp (facing, mp (i, j))] = true;
+void traverse(char facing, int i, int j) {
+    if (!(i < 0 || i > n - 1 || j < 0 || j > n - 1)) {
+        p[mp(facing, mp(i, j))] = true;
         char ch = inp[i][j];
         ene[i][j] = true;
 
         switch (facing) {
-        case 'r':
-            if (ch == '.' || ch == '-') {
-                if (!p[mp ('r', mp (i, j + 1))]) {
-                    traverse ('r', i, j + 1);
-                }
-            } else if (ch == '\\') {
-                if (!p[mp ('d', mp (i + 1, j))]) {
-                    traverse ('d', i + 1, j);
-                }
-            } else if (ch == '/') {
-                if (!p[mp ('u', mp (i - 1, j))]) {
-                    traverse ('u', i - 1, j);
-                }
-            } else if (ch == '|') {
-                if (!p[mp ('u', mp (i - 1, j))]) {
-                    traverse ('u', i - 1, j);
+            case 'r':
+                if (ch == '.' || ch == '-') {
+                    if (!p[mp('r', mp(i, j + 1))]) {
+                        traverse('r', i, j + 1);
+                    }
+                } else if (ch == '\\') {
+                    if (!p[mp('d', mp(i + 1, j))]) {
+                        traverse('d', i + 1, j);
+                    }
+                } else if (ch == '/') {
+                    if (!p[mp('u', mp(i - 1, j))]) {
+                        traverse('u', i - 1, j);
+                    }
+                } else if (ch == '|') {
+                    if (!p[mp('u', mp(i - 1, j))]) {
+                        traverse('u', i - 1, j);
+                    }
+
+                    if (!p[mp('d', mp(i + 1, j))]) {
+                        traverse('d', i + 1, j);
+                    }
                 }
 
-                if (!p[mp ('d', mp (i + 1, j))]) {
-                    traverse ('d', i + 1, j);
-                }
-            }
+                break;
 
-            break;
+            case 'l':
+                if (ch == '.' || ch == '-') {
+                    if (!p[mp('l', mp(i, j - 1))]) {
+                        traverse('l', i, j - 1);
+                    }
+                } else if (ch == '/') {
+                    if (!p[mp('d', mp(i + 1, j))]) {
+                        traverse('d', i + 1, j);
+                    }
+                } else if (ch == '\\') {
+                    if (!p[mp('u', mp(i - 1, j))]) {
+                        traverse('u', i - 1, j);
+                    }
+                } else if (ch == '|') {
+                    if (!p[mp('u', mp(i - 1, j))]) {
+                        traverse('u', i - 1, j);
+                    }
 
-        case 'l':
-            if (ch == '.' || ch == '-') {
-                if (!p[mp ('l', mp (i, j - 1))]) {
-                    traverse ('l', i, j - 1);
-                }
-            } else if (ch == '/') {
-                if (!p[mp ('d', mp (i + 1, j))]) {
-                    traverse ('d', i + 1, j);
-                }
-            } else if (ch == '\\') {
-                if (!p[mp ('u', mp (i - 1, j))]) {
-                    traverse ('u', i - 1, j);
-                }
-            } else if (ch == '|') {
-                if (!p[mp ('u', mp (i - 1, j))]) {
-                    traverse ('u', i - 1, j);
-                }
-
-                if (!p[mp ('d', mp (i + 1, j))]) {
-                    traverse ('d', i + 1, j);
-                }
-            }
-
-            break;
-
-        case 'u':
-            if (ch == '.' || ch == '|') {
-                if (!p[mp ('u', mp (i - 1, j))]) {
-                    traverse ('u', i - 1, j);
-                }
-            } else if (ch == '\\') {
-                if (!p[mp ('l', mp (i, j - 1))]) {
-                    traverse ('l', i, j - 1);
-                }
-            } else if (ch == '/') {
-                if (!p[mp ('r', mp (i, j + 1))]) {
-                    traverse ('r', i, j + 1);
-                }
-            } else if (ch == '-') {
-                if (!p[mp ('r', mp (i, j + 1))]) {
-                    traverse ('r', i, j + 1);
+                    if (!p[mp('d', mp(i + 1, j))]) {
+                        traverse('d', i + 1, j);
+                    }
                 }
 
-                if (!p[mp ('l', mp (i, j - 1))]) {
-                    traverse ('l', i, j - 1);
-                }
-            }
+                break;
 
-            break;
+            case 'u':
+                if (ch == '.' || ch == '|') {
+                    if (!p[mp('u', mp(i - 1, j))]) {
+                        traverse('u', i - 1, j);
+                    }
+                } else if (ch == '\\') {
+                    if (!p[mp('l', mp(i, j - 1))]) {
+                        traverse('l', i, j - 1);
+                    }
+                } else if (ch == '/') {
+                    if (!p[mp('r', mp(i, j + 1))]) {
+                        traverse('r', i, j + 1);
+                    }
+                } else if (ch == '-') {
+                    if (!p[mp('r', mp(i, j + 1))]) {
+                        traverse('r', i, j + 1);
+                    }
 
-        case 'd':
-            if (ch == '.' || ch == '|') {
-                if (!p[mp ('d', mp (i + 1, j))]) {
-                    traverse ('d', i + 1, j);
-                }
-            } else if (ch == '\\') {
-                if (!p[mp ('r', mp (i, j + 1))]) {
-                    traverse ('r', i, j + 1);
-                }
-            } else if (ch == '/') {
-                if (!p[mp ('l', mp (i, j - 1))]) {
-                    traverse ('l', i, j - 1);
-                }
-            } else if (ch == '-') {
-                if (!p[mp ('r', mp (i, j + 1))]) {
-                    traverse ('r', i, j + 1);
+                    if (!p[mp('l', mp(i, j - 1))]) {
+                        traverse('l', i, j - 1);
+                    }
                 }
 
-                if (!p[mp ('l', mp (i, j - 1))]) {
-                    traverse ('l', i, j - 1);
+                break;
+
+            case 'd':
+                if (ch == '.' || ch == '|') {
+                    if (!p[mp('d', mp(i + 1, j))]) {
+                        traverse('d', i + 1, j);
+                    }
+                } else if (ch == '\\') {
+                    if (!p[mp('r', mp(i, j + 1))]) {
+                        traverse('r', i, j + 1);
+                    }
+                } else if (ch == '/') {
+                    if (!p[mp('l', mp(i, j - 1))]) {
+                        traverse('l', i, j - 1);
+                    }
+                } else if (ch == '-') {
+                    if (!p[mp('r', mp(i, j + 1))]) {
+                        traverse('r', i, j + 1);
+                    }
+
+                    if (!p[mp('l', mp(i, j - 1))]) {
+                        traverse('l', i, j - 1);
+                    }
                 }
-            }
 
-            break;
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 }
+
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
 
     if (input.is_open()) {
@@ -156,9 +162,9 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while ( getline (input, line) ) {
-            for (size_t h = 0; h < line.size(); h++) {
-                ch = line[h];
+        while (getline(input, line)) {
+            for (char h: line) {
+                ch = h;
 
                 if (j == n) {
                     i++;
@@ -182,10 +188,10 @@ int solve() {
     }
 
     ll ans = 0;
-    ll c = 0;
+    ll c;
 
     for (int h = 0; h < n; h++) {
-        traverse ('r', h, 0);
+        traverse('r', h, 0);
         c = 0;
 
         for (int i = 0; i < n; i++) {
@@ -201,7 +207,7 @@ int solve() {
         }
 
         reset();
-        traverse ('l', h, n - 1);
+        traverse('l', h, n - 1);
         c = 0;
 
         for (int i = 0; i < n; i++) {
@@ -217,7 +223,7 @@ int solve() {
         }
 
         reset();
-        traverse ('d', 0, h);
+        traverse('d', 0, h);
         c = 0;
 
         for (int i = 0; i < n; i++) {
@@ -233,7 +239,7 @@ int solve() {
         }
 
         reset();
-        traverse ('u', n - 1, h);
+        traverse('u', n - 1, h);
         c = 0;
 
         for (int i = 0; i < n; i++) {
@@ -256,7 +262,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

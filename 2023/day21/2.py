@@ -1,5 +1,4 @@
 import os
-import copy
 from collections import (
     deque,
 )  # just use queue based for loop instead of recursion... wow
@@ -38,12 +37,12 @@ def step(si, sj, ss):
 
         for ni, nj in [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]:
             if (
-                ni < 0
-                or ni >= len(garden)
-                or nj < 0
-                or nj >= len(garden[0])
-                or garden[ni][nj] == "#"
-                or (ni, nj) in done
+                    ni < 0
+                    or ni >= len(garden)
+                    or nj < 0
+                    or nj >= len(garden[0])
+                    or garden[ni][nj] == "#"
+                    or (ni, nj) in done
             ):
                 continue
             done.add((ni, nj))

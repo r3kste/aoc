@@ -36,10 +36,10 @@ def poi(line1, line2):
         sb1 = b1 / abs(b1)
         sb2 = b2 / abs(b2)
         if (
-            sa1 * x > sa1 * x1
-            and sa2 * x > sa2 * x2
-            and sb1 * y > sb1 * y1
-            and sb2 * y > sb2 * y2
+                sa1 * x > sa1 * x1
+                and sa2 * x > sa2 * x2
+                and sb1 * y > sb1 * y1
+                and sb2 * y > sb2 * y2
         ):
             return (x, y)
         else:

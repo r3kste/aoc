@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,21 +26,24 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
-    ll val = 0;
+    fastio
+    ll val;
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     ll ans = 0;
-    vector < vector<pair<string, int>>> p (256, vector<pair<string, int>> (0, mp ("", 0)));
+    vector<vector<pair<string, int>>> p(256, vector<pair<string, int>>(0, mp("", 0)));
 
     if (input.is_open()) {
-        getline (input, line);
-        stringstream words (line);
+        getline(input, line);
+        stringstream words(line);
         string subword;
 
-        while (getline (words, subword, ',')) {
-            string label = "";
+        while (getline(words, subword, ',')) {
+            string label;
             int op = 0;
             int foc = 0;
 
@@ -51,7 +55,7 @@ int solve() {
                     break;
                 } else if (i == '=') {
                     op = 1;
-                    foc = (subword[j + 1]) - int ('0');
+                    foc = (subword[j + 1]) - int('0');
                     break;
                 } else {
                     label += (i);
@@ -60,8 +64,8 @@ int solve() {
 
             val = 0;
 
-            for (auto i : label) {
-                val += int (i);
+            for (auto i: label) {
+                val += int(i);
                 val *= 17;
                 val %= 256;
             }
@@ -71,25 +75,25 @@ int solve() {
                 vector<pair<string, int>> t;
 
                 // for (auto i : p[val])
-                for (size_t j = 0; j < p[val].size(); j++) {
-                    auto i = p[val][j];
+                for (auto &j: p[val]) {
+                    auto i = j;
 
                     if (i.F == label) {
-                        p[val][j].S = foc;
+                        j.S = foc;
                         flag = false;
                         break;
                     }
                 }
 
                 if (flag) {
-                    p[val].pb (mp (label, foc));
+                    p[val].pb(mp(label, foc));
                 }
             } else if (op == -1) {
                 vector<pair<string, int>> t;
 
-                for (auto i : p[val]) {
+                for (const auto &i: p[val]) {
                     if (i.F != label) {
-                        t.pb (mp (i.F, i.S));
+                        t.pb(mp(i.F, i.S));
                     }
                 }
 
@@ -111,7 +115,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

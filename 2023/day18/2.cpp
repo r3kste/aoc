@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -14,7 +15,7 @@ using namespace std;
 #define y second
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -24,7 +25,8 @@ typedef pair<int, int> ii;
 typedef vector<int> vi;
 typedef vector<pair<ll, ll>> vii;
 typedef vector<long long int> vll;
-ll polygon_area (vii fig) {
+
+ll polygon_area(vii fig) {
     ll res = 0;
 
     for (size_t i = 0; i < fig.size(); i++) {
@@ -34,50 +36,54 @@ ll polygon_area (vii fig) {
         ll b = p.y;
         ll c = q.x;
         ll d = q.y;
-        res +=  (a * d - b * c);
+        res += (a * d - b * c);
     }
 
-    return abs (res);
+    return abs(res);
 }
+
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     vector<pair<char, int>> p;
 
     if (input.is_open()) {
-        while ( getline (input, line) ) {
-            stringstream words (line);
+        while (getline(input, line)) {
+            stringstream words(line);
             string word;
-            getline (words, word, ' ');
-            getline (words, word, ' ');
-            getline (words, word, ' ');
+            getline(words, word, ' ');
+            getline(words, word, ' ');
+            getline(words, word, ' ');
             char dir;
 
             switch (word[word.size() - 2]) {
-            case '0':
-                dir = 'R';
-                break;
+                case '0':
+                    dir = 'R';
+                    break;
 
-            case '1':
-                dir = 'D';
-                break;
+                case '1':
+                    dir = 'D';
+                    break;
 
-            case '2':
-                dir = 'L';
-                break;
+                case '2':
+                    dir = 'L';
+                    break;
 
-            case '3':
-                dir = 'U';
-                break;
+                case '3':
+                    dir = 'U';
+                    break;
             }
 
-            word = word.substr (2, 5);
-            istringstream h (word);
+            word = word.substr(2, 5);
+            istringstream h(word);
             ll n;
             h >> hex >> n;
-            p.pb (mp (dir, n));
+            p.pb(mp(dir, n));
         }
 
         input.close();
@@ -86,46 +92,46 @@ int solve() {
     ll X = 0;
     ll Y = 0;
     vii corner;
-    corner.pb (mp (0, 0));
+    corner.pb(mp(0, 0));
     ll b = 0;
 
-    for (auto i : p) {
+    for (auto i: p) {
         b += i.S;
 
         switch (i.F) {
-        case 'R':
-            X += i.S;
-            corner.pb (mp (X, Y));
-            break;
+            case 'R':
+                X += i.S;
+                corner.pb(mp(X, Y));
+                break;
 
-        case 'L':
-            X -= i.S;
-            corner.pb (mp (X, Y));
-            break;
+            case 'L':
+                X -= i.S;
+                corner.pb(mp(X, Y));
+                break;
 
-        case 'U':
-            Y += i.S;
-            corner.pb (mp (X, Y));
-            break;
+            case 'U':
+                Y += i.S;
+                corner.pb(mp(X, Y));
+                break;
 
-        case 'D':
-            Y -= i.S;
-            corner.pb (mp (X, Y));
-            break;
+            case 'D':
+                Y -= i.S;
+                corner.pb(mp(X, Y));
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 
-    corner.pb (mp (0, 0));
-    ll A = polygon_area (corner);
-    cout <<  (A + b + 2) / 2;
+    corner.pb(mp(0, 0));
+    ll A = polygon_area(corner);
+    cout << (A + b + 2) / 2;
     return 0;
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

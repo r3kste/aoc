@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -26,54 +27,59 @@ typedef vector<long long int> vll;
 
 #define order 500
 char ground[order][order];
-void floodfill (int i, int j) {
-    if  (i >= 0 && i < order && j >= 0 && j < order) {
+
+void floodfill(int i, int j) {
+    if (i >= 0 && i < order && j >= 0 && j < order) {
         ground[i][j] = '#';
 
         if (ground[i][j + 1] != '#') {
-            floodfill (i, j + 1);
+            floodfill(i, j + 1);
         }
 
         if (ground[i][j - 1] != '#') {
-            floodfill (i, j - 1);
+            floodfill(i, j - 1);
         }
 
         if (ground[i + 1][j] != '#') {
-            floodfill (i + 1, j);
+            floodfill(i + 1, j);
         }
 
         if (ground[i - 1][j] != '#') {
-            floodfill (i - 1, j);
+            floodfill(i - 1, j);
         }
     }
 }
+
 int solve() {
-    fastio;
+    fastio
     ifstream input;
     ofstream output;
-    input.open ("input.txt");
-    output.open ("output.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
+    output.open("output.txt");
     string line;
     vector<pair<pair<char, int>, string>> p;
 
     if (input.is_open()) {
-        while ( getline (input, line) ) {
-            stringstream words (line);
+        while (getline(input, line)) {
+            stringstream words(line);
             string word;
             string word2;
             string word3;
-            getline (words, word, ' ');
-            getline (words, word2, ' ');
-            getline (words, word3, ' ');
-            p.pb (mp (mp (word[0], stoi (word2)), word3));
+            getline(words, word, ' ');
+            getline(words, word2, ' ');
+            getline(words, word3, ' ');
+            p.pb(mp(mp(word[0], stoi(word2)), word3));
         }
 
         input.close();
     }
 
-    for (int i = 0; i < order; i++) {
-        for (int j = 0; j < order; j++) {
-            ground[i][j] = '.';
+    for (auto &i: ground) {
+        for (char &j: i) {
+            j = '.';
         }
     }
 
@@ -81,42 +87,42 @@ int solve() {
     int pj = order / 2;
     ground[pi][pj] = '#';
 
-    for (auto a : p) {
+    for (const auto &a: p) {
         int n = a.F.S;
         char dir = a.F.F;
 
         for (int i = 1; i <= n; i++) {
             switch (dir) {
-            case 'L':
-                ground[pi][--pj] = '#';
-                break;
+                case 'L':
+                    ground[pi][--pj] = '#';
+                    break;
 
-            case 'R':
-                ground[pi][++pj] = '#';
-                break;
+                case 'R':
+                    ground[pi][++pj] = '#';
+                    break;
 
-            case 'U':
-                ground[--pi][pj] = '#';
-                break;
+                case 'U':
+                    ground[--pi][pj] = '#';
+                    break;
 
-            case 'D':
-                ground[++pi][pj] = '#';
-                break;
+                case 'D':
+                    ground[++pi][pj] = '#';
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         }
     }
 
-    floodfill (90, 50);
+    floodfill(90, 50);
     ll c = 0;
 
-    for (int i = 0; i < order; i++) {
-        for (int j = 0; j < order; j++) {
-            output << ground[i][j];
+    for (auto &i: ground) {
+        for (char j: i) {
+            output << j;
 
-            if (ground[i][j] == '#') {
+            if (j == '#') {
                 c++;
             }
         }
@@ -129,7 +135,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

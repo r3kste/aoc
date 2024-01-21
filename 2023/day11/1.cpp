@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,26 +26,29 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     int r = 140;
     int c = 140;
-    vector<vector<char>> inp (r, vector<char> (c, '.'));
-    vector<vector<char>> index (r, vector<char> (c, '.'));
+    vector<vector<char>> inp(r, vector<char>(c, '.'));
+    vector<vector<char>> index(r, vector<char>(c, '.'));
     vii ind;
-    vi rval (r, 2);
-    vi cval (c, 2);
+    vi rval(r, 2);
+    vi cval(c, 2);
 
     if (input.is_open()) {
         char ch;
         int i = 0;
         int j = 0;
 
-        while (getline (input, line)) {
-            for (size_t h = 0; h < line.size(); h++) {
-                ch = line[h];
+        while (getline(input, line)) {
+            for (char h: line) {
+                ch = h;
 
                 if (i == r) {
                     break;
@@ -56,7 +60,7 @@ int solve() {
                 }
 
                 if (ch == '#') {
-                    ind.pb (mp (i, j));
+                    ind.pb(mp(i, j));
                     rval[i] = 1;
                     cval[j] = 1;
                 }
@@ -74,17 +78,17 @@ int solve() {
     }
 
     vi psr;
-    psr.pb (0);
+    psr.pb(0);
 
     for (size_t i = 0; i < rval.size(); i++) {
-        psr.pb (psr[i] + rval[i]);
+        psr.pb(psr[i] + rval[i]);
     }
 
     vi psc;
-    psc.pb (0);
+    psc.pb(0);
 
     for (size_t i = 0; i < cval.size(); i++) {
-        psc.pb (psc[i] + cval[i]);
+        psc.pb(psc[i] + cval[i]);
     }
 
     int fi, fj, si, sj;
@@ -97,7 +101,7 @@ int solve() {
         for (size_t j = i + 1; j < ind.size(); j++) {
             si = ind[j].F;
             sj = ind[j].S;
-            ans += (abs (psr[si] - psr[fi]) + abs (psc[sj] - psc[fj]));
+            ans += (abs(psr[si] - psr[fi]) + abs(psc[sj] - psc[fj]));
         }
     }
 
@@ -106,7 +110,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

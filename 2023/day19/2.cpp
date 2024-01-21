@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -24,14 +25,13 @@ typedef vector<int> vi;
 typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
-map < string, vector<pair<pair<pair<char, char>, int>, string>>> p;
-map<string, LL> dp;
+map<string, vector<pair<pair<pair<char, char>, int>, string>>> p;
 
-LL ff (string workflow, map<char, pair<int, int>> range) {
+LL ff(const string &workflow, const map<char, pair<int, int>> &range) {
     if (workflow == "A") {
         ll ans = 1;
 
-        for (auto i : range) {
+        for (auto i: range) {
             int l = i.S.F;
             int r = i.S.S;
             ans *= (r - l + 1);
@@ -49,7 +49,7 @@ LL ff (string workflow, map<char, pair<int, int>> range) {
         string target;
         char quantity, ineq;
 
-        for (auto i : p[workflow]) {
+        for (const auto &i: p[workflow]) {
             flag = true;
             target = i.S;
             quantity = i.F.F.F;
@@ -59,27 +59,27 @@ LL ff (string workflow, map<char, pair<int, int>> range) {
             int r = xmas[quantity].S;
 
             switch (ineq) {
-            case '<':
-                t = mp (l, n - 1);
-                f = mp (n, r);
-                break;
+                case '<':
+                    t = mp(l, n - 1);
+                    f = mp(n, r);
+                    break;
 
-            case '>':
-                t = mp (n + 1, r);
-                f = mp (l, n);
-                break;
+                case '>':
+                    t = mp(n + 1, r);
+                    f = mp(l, n);
+                    break;
 
-            case ' ':
-                goto oo;
+                case ' ':
+                    goto oo;
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             if (t.F <= t.S) {
                 auto copy = xmas;
                 copy[quantity] = t;
-                sum += ff (target, copy);
+                sum += ff(target, copy);
             }
 
             if (f.F <= f.S) {
@@ -91,42 +91,46 @@ LL ff (string workflow, map<char, pair<int, int>> range) {
         }
 
         if (flag) {
-oo:
-            sum += ff (target, xmas);
+            oo:
+            sum += ff(target, xmas);
         }
 
         return sum;
     }
 }
+
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
 
     if (input.is_open()) {
-        while ( getline (input, line) ) {
-            if (line == "") {
-                getline (input, line);
+        while (getline(input, line)) {
+            if (line.empty()) {
+                getline(input, line);
                 break;
             }
 
-            string workflow = line.substr (0, line.find ('{'));
-            line = line.substr (line.find ('{') + 1, line.find ('}') - workflow.size() - 1);
-            stringstream operations (line);
+            string workflow = line.substr(0, line.find('{'));
+            line = line.substr(line.find('{') + 1, line.find('}') - workflow.size() - 1);
+            stringstream operations(line);
             string operation;
 
-            while (getline (operations, operation, ',')) {
+            while (getline(operations, operation, ',')) {
                 char quantity, ineq;
                 string num, target;
                 ll number;
 
-                if (operation.size() > 1 && isdigit (operation[2])) {
+                if (operation.size() > 1 && isdigit(operation[2])) {
                     quantity = operation[0];
                     ineq = operation[1];
-                    num = operation.substr (2, operation.find (':') - 2);
-                    number = stoll (num);
-                    target = operation.substr (operation.find (':') + 1, operation.size() - 3 - num.size());
+                    num = operation.substr(2, operation.find(':') - 2);
+                    number = stoll(num);
+                    target = operation.substr(operation.find(':') + 1, operation.size() - 3 - num.size());
                 } else {
                     quantity = ' ';
                     ineq = ' ';
@@ -134,7 +138,7 @@ int solve() {
                     target = operation;
                 }
 
-                p[workflow].pb (mp (mp (mp (quantity, ineq), number), target));
+                p[workflow].pb(mp(mp(mp(quantity, ineq), number), target));
             }
         }
 
@@ -143,16 +147,16 @@ int solve() {
 
     // f(wf,ranges) = number of ways to go from that workflow to 'A' with ranges as limits
     map<char, pair<int, int>> xmas;
-    xmas['x'] = mp (1, 4000);
-    xmas['m'] = mp (1, 4000);
-    xmas['a'] = mp (1, 4000);
-    xmas['s'] = mp (1, 4000);
-    cout << ff ("in", xmas);
+    xmas['x'] = mp(1, 4000);
+    xmas['m'] = mp(1, 4000);
+    xmas['a'] = mp(1, 4000);
+    xmas['s'] = mp(1, 4000);
+    cout << ff("in", xmas);
     return 0;
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

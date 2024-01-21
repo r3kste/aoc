@@ -1,0 +1,6 @@
+*.txt
+!CMakeLists.txt
+*.dot
+*.png
+t.cpp
+cmake-build-debug/

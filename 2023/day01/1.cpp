@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,26 +26,29 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     ll sum = 0;
 
     if (input.is_open()) {
-        while ( getline (input, line) ) {
+        while (getline(input, line)) {
             int a = 0;
             int b = 0;
             bool flag = true;
 
-            for (size_t i = 0; i < line.size(); i++) {
-                if (int (line[i]) >= 48 && int (line[i]) <= 57) {
+            for (char i: line) {
+                if (int(i) >= 48 && int(i) <= 57) {
                     if (flag) {
-                        a = int (line[i]) - 48;
+                        a = int(i) - 48;
                         b = a;
                         flag = false;
                     } else {
-                        b = int (line[i]) - 48;
+                        b = int(i) - 48;
                     }
                 }
             }
@@ -60,7 +64,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

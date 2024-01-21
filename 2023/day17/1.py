@@ -1,5 +1,5 @@
-import os
 import heapq
+import os
 
 input = open(os.path.dirname(__file__) + "/input.txt", "r")
 a = [list(map(int, line.strip())) for line in input]

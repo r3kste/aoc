@@ -24,7 +24,6 @@ for module in p:
                 state[j] = "low"
     p[module] = (typ, targets, state)
 
-
 low = high = 0
 from collections import deque as q
 

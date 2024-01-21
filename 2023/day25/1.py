@@ -1,6 +1,5 @@
 import os
 
-
 input_file = open(os.path.dirname(__file__) + "/input.txt", "r")
 output_file = open(os.path.dirname(__file__) + "/output.txt", "w")
 

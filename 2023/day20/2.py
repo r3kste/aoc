@@ -57,11 +57,14 @@ while True:  # button presses
                 import math
                 import functools
 
+
                 def lcm(a, b):
                     return abs(a * b) // math.gcd(a, b)
 
+
                 def lcm_list(numbers):
                     return functools.reduce(lcm, numbers)
+
 
                 print(lcm_list(length.values()))
                 exit(0)

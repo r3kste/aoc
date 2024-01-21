@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,9 +26,12 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string word;
     bool flag = false;
     bool flag2 = false;
@@ -37,59 +41,59 @@ int solve() {
     ll sum = 0;
 
     if (input.is_open()) {
-        while ( getline (input, word, ' ') ) {
-            while (word == "") {
-                getline (input, word, ' ');
+        while (getline(input, word, ' ')) {
+            while (word.empty()) {
+                getline(input, word, ' ');
             }
 
             if (word == "Card") {
-                getline (input, word, ' ');
+                getline(input, word, ' ');
             }
 
-            while (word == "") {
-                getline (input, word, ' ');
+            while (word.empty()) {
+                getline(input, word, ' ');
             }
 
             if (word[word.size() - 1] == ':') {
-                getline (input, word, ' ');
+                getline(input, word, ' ');
                 flag = false;
             }
 
-            while (word == "") {
-                getline (input, word, ' ');
+            while (word.empty()) {
+                getline(input, word, ' ');
             }
 
             if (word[word.size() - 1] == '|') {
-                getline (input, word, ' ');
+                getline(input, word, ' ');
                 flag = true;
             }
 
-            while (word == "") {
-                getline (input, word, ' ');
+            while (word.empty()) {
+                getline(input, word, ' ');
             }
 
-            if (word.find ("\n") != string::npos) {
+            if (word.find('\n') != string::npos) {
                 // word=word.substr(word.find("\n"),word.size()-word.find("\n"));
-                word = word.substr (0, word.find ("\n"));
+                word = word.substr(0, word.find('\n'));
                 flag2 = true;
             }
 
             if (flag) {
-                b.pb (stoi (word));
+                b.pb(stoi(word));
             } else {
-                a.pb (stoi (word));
+                a.pb(stoi(word));
             }
 
             if (flag2) {
-                for (size_t i = 0; i < a.size(); i++) {
-                    for (size_t j = 0; j < b.size(); j++) {
-                        if (a[i] == b[j]) {
+                for (int i: a) {
+                    for (int j: b) {
+                        if (i == j) {
                             c++;
                         }
                     }
                 }
 
-                sum += ll (pow (2, c - 1));
+                sum += ll(pow(2, c - 1));
                 a.clear();
                 b.clear();
                 flag2 = false;
@@ -105,7 +109,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,52 +26,55 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     vector<pair<int, pair<string, int>>> p;
 
     if (input.is_open()) {
-        while ( getline (input, line) ) {
-            stringstream words (line);
+        while (getline(input, line)) {
+            stringstream words(line);
             string temp;
-            getline (words, temp, ' ');
-            string temp1 = "";
+            getline(words, temp, ' ');
+            string temp1;
 
             for (int i = 0; i < 5; i++) {
                 char ch = temp[i];
 
                 switch (ch) {
-                case 'A':
-                    temp1 += "Z";
-                    break;
+                    case 'A':
+                        temp1 += "Z";
+                        break;
 
-                case 'K':
-                    temp1 += "Y";
-                    break;
+                    case 'K':
+                        temp1 += "Y";
+                        break;
 
-                case 'Q':
-                    temp1 += "X";
-                    break;
+                    case 'Q':
+                        temp1 += "X";
+                        break;
 
-                case 'J':
-                    temp1 += "S";
-                    break;
+                    case 'J':
+                        temp1 += "S";
+                        break;
 
-                case 'T':
-                    temp1 += "R";
-                    break;
+                    case 'T':
+                        temp1 += "R";
+                        break;
 
-                default:
-                    temp1 += (ch);
-                    break;
+                    default:
+                        temp1 += (ch);
+                        break;
                 }
             }
 
             string temp2;
-            getline (words, temp2, ' ');
-            p.pb (mp (0, mp (temp1, stoi (temp2))));
+            getline(words, temp2, ' ');
+            p.pb(mp(0, mp(temp1, stoi(temp2))));
         }
 
         input.close();
@@ -89,15 +93,15 @@ int solve() {
 
         vi ff;
 
-        for (auto i : freq) {
-            ff.pb (i.S);
+        for (auto i: freq) {
+            ff.pb(i.S);
         }
 
-        sort (all (ff));
+        sort(all (ff));
 
-        if (ff == vector<int> {5}) {
+        if (ff == vector<int>{5}) {
             p[i].F = 7;
-        } else if (ff == vi {1, 4}) {
+        } else if (ff == vi{1, 4}) {
             p[i].F = 6;
         } else if (ff == vi{2, 3}) {
             p[i].F = 5;
@@ -114,8 +118,8 @@ int solve() {
         }
     }
 
-    sort (all (p));
-    string score = "ZYXSR98765432";
+    sort(all (p));
+    string score;
     ll sum = 0;
 
     for (int rank = 1, i = 0; i < n; i++, rank++) {
@@ -127,7 +131,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

@@ -13,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -26,16 +26,19 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     // int c = 5;
     // int r = 5;
     int c = 140;
     int r = 140;
-    vector<vector<char>> inp (r, vector<char> (c, '.'));
-    vector<vector<int>> dist (r, vector<int> (c, 0));
+    vector<vector<char>> inp(r, vector<char>(c, '.'));
+    vector<vector<int>> dist(r, vector<int>(c, 0));
     int starti, startj;
 
     if (input.is_open()) {
@@ -43,9 +46,9 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while (getline (input, line)) {
-            for (size_t h = 0; h < line.size(); h++) {
-                ch = line[h];
+        while (getline(input, line)) {
+            for (char h: line) {
+                ch = h;
 
                 if (i == r) {
                     break;
@@ -80,7 +83,7 @@ int solve() {
     k = 1;
     char from = 'l';
 
-    while (! (i == starti && j == startj)) {
+    while (!(i == starti && j == startj)) {
         char pos = inp[i][j];
         dist[i][j] = k++;
 
@@ -117,7 +120,7 @@ int solve() {
                 j--;
                 from = 'r';
             }
-        } else if (from == 'r') {
+        } else {
             if (pos == '-') {
                 j--;
                 from = 'r';
@@ -137,9 +140,9 @@ int solve() {
     k = 1;
     from = 'u';
 
-    while (! (i == starti && j == startj)) {
+    while (!(i == starti && j == startj)) {
         char pos = inp[i][j];
-        dist[i][j] = min (k++, dist[i][j]);
+        dist[i][j] = min(k++, dist[i][j]);
 
         if (from == 'l') {
             if (pos == '-') {
@@ -174,7 +177,7 @@ int solve() {
                 j--;
                 from = 'r';
             }
-        } else if (from == 'r') {
+        } else {
             if (pos == '-') {
                 j--;
                 from = 'r';
@@ -203,7 +206,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {

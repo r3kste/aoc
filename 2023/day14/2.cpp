@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,7 +26,8 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 #define n 100
-void rrr (char arr[n][n]) {
+
+void rrr(char arr[n][n]) {
     for (int i = 0; i < n / 2; i++) {
         for (int j = i; j < n - i - 1; j++) {
             // Swapping elements after each iteration in Anticlockwise direction
@@ -38,32 +40,18 @@ void rrr (char arr[n][n]) {
     }
 }
 
-void print (char a[n][n]) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (a[j][i] != '#' && a[j][i] != 'O' && a[j][i] != '.') {
-                // cout << ".";
-                a[j][i] = '.';
-            }
-
-            cout << a[j][i] << " ";
-        }
-
-        cout << "\n";
-    }
-
-    cout << "\n\n";
-}
-
 int solve() {
     // fastio;
     ifstream input;
-    input.open ("input.txt");
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     // n *= 10;
     // vector<vector<char>> one (n, vector<char> (n, '.'));
     char one[n][n];
-    ll ans = 0;
+    ll ans;
     vll anss;
 
     if (input.is_open()) {
@@ -71,9 +59,9 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while (getline (input, line)) {
-            for (size_t h = 0; h < line.size(); h++) {
-                ch = line[h];
+        while (getline(input, line)) {
+            for (char h: line) {
+                ch = h;
 
                 if (i == n) {
                     break;
@@ -142,10 +130,10 @@ int solve() {
         }
 
         if ((g + 1) % 4 == 0) {
-            anss.pb (ans);
+            anss.pb(ans);
         }
 
-        rrr (two);
+        rrr(two);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -157,8 +145,8 @@ int solve() {
     // print (one);
 
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            char ch = one[j][i];
+        for (auto &j: one) {
+            char ch = j[i];
 
             if (ch == 'O') {
                 ans += (n - i);

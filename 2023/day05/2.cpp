@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define MOD (LL)(1e9 + 7)
@@ -12,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define mp make_pair
-#define pb push_back
+#define pb emplace_back
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
@@ -25,30 +26,32 @@ typedef vector<pair<int, int>> vii;
 typedef vector<long long int> vll;
 
 int solve() {
-    fastio;
+    fastio
     ifstream input;
-    string file = "input.txt";
-    input.open (file);
+    std::filesystem::path path(__FILE__);
+    path = path.parent_path();
+    path /= "input.txt";
+    input.open(path);
     string line;
     ll mapto;
-    getline (input, line);
-    stringstream words (line);
+    getline(input, line);
+    stringstream words(line);
     string tempo1, tempo2;
-    vector < pair < ll, ll>> seeds;
+    vector<pair<ll, ll>> seeds;
     map<ll, vector<vll>> p;
 
-    while (getline (words, tempo1, ' ')) {
-        if (isdigit (tempo1[0])) {
-            getline (words, tempo2, ' ');
-            ll t1 = stoll (tempo1);
-            ll t2 = stoll (tempo2);
-            seeds.pb (mp (t1, t2 + t1));
+    while (getline(words, tempo1, ' ')) {
+        if (isdigit(tempo1[0])) {
+            getline(words, tempo2, ' ');
+            ll t1 = stoll(tempo1);
+            ll t2 = stoll(tempo2);
+            seeds.pb(mp(t1, t2 + t1));
         }
     }
 
     if (input.is_open()) {
-        while ( getline (input, line) ) {
-            if (line == "") {
+        while (getline(input, line)) {
+            if (line.empty()) {
                 continue;
             } else {
                 if (line == "seed-to-soil map:") {
@@ -66,18 +69,18 @@ int solve() {
                 } else if (line == "humidity-to-location map:") {
                     mapto = 7;
                 } else {
-                    stringstream indices (line);
+                    stringstream indices(line);
                     string temp;
                     vll ttt;
 
-                    while (getline (indices, temp, ' ')) {
-                        if (isdigit (temp[0])) {
-                            ttt.pb (stoll (temp));
+                    while (getline(indices, temp, ' ')) {
+                        if (isdigit(temp[0])) {
+                            ttt.pb(stoll(temp));
                         }
                     }
 
                     if (ttt.size() == 3) {
-                        p[mapto - 1].pb ({ttt[0], ttt[1], ttt[2]});
+                        p[mapto - 1].push_back({ttt[0], ttt[1], ttt[2]});
                     }
                 }
             }
@@ -86,32 +89,32 @@ int solve() {
         input.close();
     }
 
-    for (auto operation : p) {
+    for (const auto &operation: p) {
         vector<pair<ll, ll>> next;
 
-        while (seeds.size() > 0) {
+        while (!seeds.empty()) {
             ll l = seeds.back().F;
             ll r = seeds.back().S;
             seeds.pop_back();
             bool flag;
 
-            for (auto limits : operation.S) {
+            for (auto limits: operation.S) {
                 ll dest_start = limits[0];
                 ll sauc_start = limits[1];
                 ll lent_lenth = limits[2];
-                ll os = max (l, sauc_start);
-                ll oe = min (r, sauc_start + lent_lenth);
+                ll os = max(l, sauc_start);
+                ll oe = min(r, sauc_start + lent_lenth);
                 flag = false;
 
                 if (os < oe) {
-                    next.pb (mp (os - sauc_start + dest_start, oe - sauc_start + dest_start));
+                    next.pb(mp(os - sauc_start + dest_start, oe - sauc_start + dest_start));
 
                     if (os > l) {
-                        seeds.pb (mp (l, os));
+                        seeds.pb(mp(l, os));
                     }
 
                     if (oe < r) {
-                        seeds.pb (mp (oe, r));
+                        seeds.pb(mp(oe, r));
                     }
 
                     flag = true;
@@ -120,7 +123,7 @@ int solve() {
             }
 
             if (!flag) {
-                next.pb (mp (l, r));
+                next.pb(mp(l, r));
             }
         }
 
@@ -129,7 +132,7 @@ int solve() {
 
     ll min = MOD * MOD;
 
-    for (auto i : seeds) {
+    for (auto i: seeds) {
         if (i.F < min) {
             min = i.F;
         }
@@ -140,7 +143,7 @@ int solve() {
 }
 
 int main() {
-    fastio;
+    fastio
     int t = 1;
 
     while (t--) {
