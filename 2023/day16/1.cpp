@@ -1,0 +1,203 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MOD (LL)(1e9 + 7)
+#define fastio                        \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);
+
+#define endl "\n"
+#define yesno(a) cout << ((a) ? "Yes" : "No");
+
+#define F first
+#define S second
+#define mp make_pair
+#define pb push_back
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+
+typedef long long int ll;
+typedef unsigned long long int LL;
+typedef pair<int, int> ii;
+
+typedef vector<int> vi;
+typedef vector<pair<int, int>> vii;
+typedef vector<long long int> vll;
+
+int n = 110;
+vector<vector<char>> inp (n, vector<char> (n, '.'));
+vector<vector<bool>> ene (n, vector<bool> (n, false));
+map<pair<char, pair<int, int>>, bool> p;
+
+void traverse (char facing, int i, int j) {
+    if (! (i < 0 || i > n - 1 || j < 0 || j > n - 1)) {
+        p[mp (facing, mp (i, j))] = true;
+        char ch = inp[i][j];
+        ene[i][j] = true;
+
+        switch (facing) {
+        case 'r':
+            if (ch == '.' || ch == '-') {
+                if (!p[mp ('r', mp (i, j + 1))]) {
+                    traverse ('r', i, j + 1);
+                }
+            } else if (ch == '\\') {
+                if (!p[mp ('d', mp (i + 1, j))]) {
+                    traverse ('d', i + 1, j);
+                }
+            } else if (ch == '/') {
+                if (!p[mp ('u', mp (i - 1, j))]) {
+                    traverse ('u', i - 1, j);
+                }
+            } else if (ch == '|') {
+                if (!p[mp ('u', mp (i - 1, j))]) {
+                    traverse ('u', i - 1, j);
+                }
+
+                if (!p[mp ('d', mp (i + 1, j))]) {
+                    traverse ('d', i + 1, j);
+                }
+            }
+
+            break;
+
+        case 'l':
+            if (ch == '.' || ch == '-') {
+                if (!p[mp ('l', mp (i, j - 1))]) {
+                    traverse ('l', i, j - 1);
+                }
+            } else if (ch == '/') {
+                if (!p[mp ('d', mp (i + 1, j))]) {
+                    traverse ('d', i + 1, j);
+                }
+            } else if (ch == '\\') {
+                if (!p[mp ('u', mp (i - 1, j))]) {
+                    traverse ('u', i - 1, j);
+                }
+            } else if (ch == '|') {
+                if (!p[mp ('u', mp (i - 1, j))]) {
+                    traverse ('u', i - 1, j);
+                }
+
+                if (!p[mp ('d', mp (i + 1, j))]) {
+                    traverse ('d', i + 1, j);
+                }
+            }
+
+            break;
+
+        case 'u':
+            if (ch == '.' || ch == '|') {
+                if (!p[mp ('u', mp (i - 1, j))]) {
+                    traverse ('u', i - 1, j);
+                }
+            } else if (ch == '\\') {
+                if (!p[mp ('l', mp (i, j - 1))]) {
+                    traverse ('l', i, j - 1);
+                }
+            } else if (ch == '/') {
+                if (!p[mp ('r', mp (i, j + 1))]) {
+                    traverse ('r', i, j + 1);
+                }
+            } else if (ch == '-') {
+                if (!p[mp ('r', mp (i, j + 1))]) {
+                    traverse ('r', i, j + 1);
+                }
+
+                if (!p[mp ('l', mp (i, j - 1))]) {
+                    traverse ('l', i, j - 1);
+                }
+            }
+
+            break;
+
+        case 'd':
+            if (ch == '.' || ch == '|') {
+                if (!p[mp ('d', mp (i + 1, j))]) {
+                    traverse ('d', i + 1, j);
+                }
+            } else if (ch == '\\') {
+                if (!p[mp ('r', mp (i, j + 1))]) {
+                    traverse ('r', i, j + 1);
+                }
+            } else if (ch == '/') {
+                if (!p[mp ('l', mp (i, j - 1))]) {
+                    traverse ('l', i, j - 1);
+                }
+            } else if (ch == '-') {
+                if (!p[mp ('r', mp (i, j + 1))]) {
+                    traverse ('r', i, j + 1);
+                }
+
+                if (!p[mp ('l', mp (i, j - 1))]) {
+                    traverse ('l', i, j - 1);
+                }
+            }
+
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+int solve() {
+    fastio;
+    ifstream input;
+    input.open ("input.txt");
+    string line;
+
+    if (input.is_open()) {
+        char ch;
+        int i = 0;
+        int j = 0;
+
+        while ( getline (input, line) ) {
+            for (size_t h = 0; h < line.size(); h++) {
+                ch = line[h];
+
+                if (j == n) {
+                    i++;
+                    j = 0;
+                }
+
+                if (i == n) {
+                    break;
+                }
+
+                if (ch == '\n') {
+                    continue;
+                }
+
+                inp[i][j] = ch;
+                j++;
+            }
+        }
+
+        input.close();
+    }
+
+    traverse ('r', 0, 0);
+    ll c = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (ene[i][j]) {
+                c++;
+            }
+        }
+    }
+
+    cout << c;
+    return 0;
+}
+
+int main() {
+    fastio;
+    int t = 1;
+
+    while (t--) {
+        solve();
+        cout << "\n";
+    }
+}
