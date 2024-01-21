@@ -1,0 +1,5 @@
+{
+    "rust-analyzer.runnables.extraEnv": {
+        "FILE_DIR": "${fileDirname}"
+    },
+}
