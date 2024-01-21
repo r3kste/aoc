@@ -1,7 +1,6 @@
 use std::{
     cmp::{max, min},
     collections::HashMap,
-    i32::MAX,
 };
 
 fn part1n2(input_file: &String) -> (i32, i32) {
@@ -22,7 +21,6 @@ fn part1n2(input_file: &String) -> (i32, i32) {
 
     let mut rings: HashMap<&str, (i32, (i32, i32))> = HashMap::new();
     rings.insert("Nothing", (0, (0, 0)));
-    rings.insert("Nothing", (0, (0, 0)));
     rings.insert("Damage +1", (25, (1, 0)));
     rings.insert("Damage +2", (50, (2, 0)));
     rings.insert("Damage +3", (100, (3, 0)));
@@ -40,7 +38,7 @@ fn part1n2(input_file: &String) -> (i32, i32) {
     let boss_damage = boss_stats[1];
     let boss_armor = boss_stats[2];
 
-    let mut min_cost = MAX;
+    let mut min_cost = i32::MAX;
     let mut max_cost = 0;
 
     for weapon in weapons {

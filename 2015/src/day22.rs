@@ -40,10 +40,10 @@ fn f(
     let poison_tick = poison_tick - if poison_tick > 0 { 1 } else { 0 };
     let shield_tick = shield_tick - if shield_tick > 0 { 1 } else { 0 };
     let recharge_tick = recharge_tick - if recharge_tick > 0 { 1 } else { 0 };
-    if turn == 1 {
+    return if turn == 1 {
         let mut new_player_stats = player_stats;
         new_player_stats.0 -= max(1, boss_stats.1 - armor);
-        return f(
+        f(
             spells,
             boss_stats,
             new_player_stats,
@@ -53,7 +53,7 @@ fn f(
             turn ^ 1,
             remaining_moves - 1,
             life_drain,
-        );
+        )
     } else {
         player_stats.0 -= life_drain;
         if player_stats.0 <= 0 {
@@ -159,7 +159,7 @@ fn f(
                 ),
             );
         }
-        return min_cost;
+        min_cost
     }
 }
 

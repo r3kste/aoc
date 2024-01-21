@@ -109,7 +109,7 @@ fn part1(input_file: &String) -> i32 {
                 circuit.insert(target, num);
             }
         } else if typ == "NOT" {
-            circuit.insert(target, !(circuit[nodes[0]]));
+            circuit.insert(target, !circuit[nodes[0]]);
         } else if typ == "AND" {
             let mut a = 0;
             let mut b = 0;
@@ -175,7 +175,7 @@ fn part2(input_file: &String) -> i32 {
                 circuit.insert(target, num);
             }
         } else if typ == "NOT" {
-            circuit.insert(target, !(circuit[nodes[0]]));
+            circuit.insert(target, !circuit[nodes[0]]);
         } else if typ == "AND" {
             let mut a = 0;
             let mut b = 0;

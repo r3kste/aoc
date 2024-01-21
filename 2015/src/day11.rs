@@ -26,15 +26,15 @@ fn valid(password: &Vec<char>) -> bool {
 }
 
 fn next_password(password: &mut Vec<char>, index: usize) -> Vec<char> {
-    if password[index] != 'z' {
+    return if password[index] != 'z' {
         password[index] = (password[index] as u8 + 1) as char;
         if password[index] == 'i' || password[index] == 'o' || password[index] == 'l' {
             password[index] = (password[index] as u8 + 1) as char;
         }
-        return password.to_vec();
+        password.to_vec()
     } else {
         password[index] = 'a';
-        return next_password(password, index - 1);
+        next_password(password, index - 1)
     }
 }
 

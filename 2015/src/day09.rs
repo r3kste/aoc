@@ -1,4 +1,4 @@
-use std::{collections::HashMap, i32::MAX};
+use std::collections::HashMap;
 
 use itertools::Itertools;
 
@@ -7,7 +7,7 @@ fn part1n2(input_file: &HashMap<&str, HashMap<&str, i32>>) -> (i32, i32) {
     cities.sort();
     let n = cities.len();
     let permutations = (0..n).into_iter().permutations(n);
-    let mut min_dist = MAX;
+    let mut min_dist = i32::MAX;
     let mut max_dist = 0;
     for permutation in permutations {
         let mut dist = 0;
