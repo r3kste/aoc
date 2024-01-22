@@ -28,10 +28,10 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     int c = 140;
     int r = 140;
@@ -41,8 +41,8 @@ int solve() {
     // int r = 9;
     // int c = 20;
     // int r = 10;
-    vector<vector<char>> inp(r, vector<char>(c, '.'));
-    vector<vector<bool>> done(r, vector<bool>(c, false));
+    vector<vector<char>> inp (r, vector<char> (c, '.'));
+    vector<vector<bool>> done (r, vector<bool> (c, false));
     int starti, startj;
     char prepos;
 
@@ -51,8 +51,8 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while (getline(input, line)) {
-            for (char h: line) {
+        while (getline (input, line)) {
+            for (char h : line) {
                 ch = h;
 
                 if (i == r) {
@@ -88,7 +88,7 @@ int solve() {
     j = startj + 1;
     char from = 'l';
 
-    while (!(i == starti && j == startj)) {
+    while (! (i == starti && j == startj)) {
         char pos = inp[i][j];
         done[i][j] = true;
 

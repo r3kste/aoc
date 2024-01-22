@@ -41,7 +41,7 @@ int solve() {
             int b = 0;
             bool flag = true;
 
-            for (char i: line) {
+            for (char i : line) {
                 if (int(i) >= 48 && int(i) <= 57) {
                     if (flag) {
                         a = int(i) - 48;

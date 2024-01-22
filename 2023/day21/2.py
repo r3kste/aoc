@@ -5,10 +5,10 @@ from collections import (
 
 n = 131
 garden = [["0" for i in range(n)] for j in range(n)]
-input = open(os.path.dirname(__file__) + "/input.txt", "r")
+input_file = open(os.path.dirname(__file__) + "/input.txt", "r")
 i = j = 0
 si = sj = 0
-for line in input:
+for line in input_file:
     for char in line:
         if char != "\n":
             garden[i][j % n] = char
@@ -52,10 +52,10 @@ def step(si, sj, ss):
 
 
 t = 26501365
-l = t // n - 1
+length = t // n - 1
 
-oc = (l // 2 * 2 + 1) ** 2
-ec = ((l + 1) // 2 * 2) ** 2
+oc = (length // 2 * 2 + 1) ** 2
+ec = ((length + 1) // 2 * 2) ** 2
 ol = step(si, sj, n)
 el = step(si, sj, n - 1)
 
@@ -76,4 +76,4 @@ lt = step(n - 1, 0, n * 3 // 2 - 1)
 lb = step(n - 1, n - 1, n * 3 // 2 - 1)
 tl = lr + ll + lt + lb
 
-print(oc * ol + ec * el + cr + cl + ct + cb + (l + 1) * (ts) + l * tl)
+print(oc * ol + ec * el + cr + cl + ct + cb + (length + 1) * ts + length * tl)

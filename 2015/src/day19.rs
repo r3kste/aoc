@@ -1,6 +1,7 @@
+use std::collections::HashSet;
+
 use itertools::enumerate;
 use rand::seq::SliceRandom;
-use std::collections::HashSet;
 
 fn part1(input_file: &String) -> i32 {
     let mut ops: Vec<(&str, &str)> = Vec::new();

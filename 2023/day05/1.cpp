@@ -28,42 +28,42 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     ll mapto = 0;
-    getline(input, line);
-    stringstream words(line);
+    getline (input, line);
+    stringstream words (line);
     string tempo;
     vll seeds;
     map<ll, vll> p;
 
-    while (getline(words, tempo, ' ')) {
-        if (isdigit(tempo[0])) {
-            seeds.pb(stoll(tempo));
+    while (getline (words, tempo, ' ')) {
+        if (isdigit (tempo[0])) {
+            seeds.pb (stoll (tempo));
         }
     }
 
     input.close();
 
-    for (long long seed: seeds) {
+    for (long long seed : seeds) {
         for (int j = 0; j < 7; j++) {
-            p[seed].pb(seed);
+            p[seed].pb (seed);
         }
     }
 
     // bool flag = true;
 
-    for (long long seed: seeds) {
-        input.open(path);
-        getline(input, line);
+    for (long long seed : seeds) {
+        input.open (path);
+        getline (input, line);
         ll mapf = 0;
         // int mapt=0;
 
         if (input.is_open()) {
-            while (getline(input, line)) {
+            while (getline (input, line)) {
                 if (line.empty()) {
                     continue;
                 } else {
@@ -96,13 +96,13 @@ int solve() {
                         mapto = 7;
                         p[seed][mapto - 1] = mapf;
                     } else {
-                        stringstream indices(line);
+                        stringstream indices (line);
                         string temp;
                         vll temp_index;
 
-                        while (getline(indices, temp, ' ')) {
-                            if (isdigit(temp[0])) {
-                                temp_index.pb(stoll(temp));
+                        while (getline (indices, temp, ' ')) {
+                            if (isdigit (temp[0])) {
+                                temp_index.pb (stoll (temp));
                             }
                         }
 
@@ -119,7 +119,7 @@ int solve() {
 
     ll min = MOD * MOD;
 
-    for (long long seed: seeds) {
+    for (long long seed : seeds) {
         if (p[seed][6] < min) {
             min = p[seed][6];
         }

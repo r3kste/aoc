@@ -27,7 +27,7 @@ typedef vector<long long int> vll;
 
 #define n 100
 
-void rrr(char arr[n][n]) {
+void rrr (char arr[n][n]) {
     for (int i = 0; i < n / 2; i++) {
         for (int j = i; j < n - i - 1; j++) {
             // Swapping elements after each iteration in Anticlockwise direction
@@ -43,10 +43,10 @@ void rrr(char arr[n][n]) {
 int solve() {
     // fastio;
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     // n *= 10;
     // vector<vector<char>> one (n, vector<char> (n, '.'));
@@ -59,8 +59,8 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while (getline(input, line)) {
-            for (char h: line) {
+        while (getline (input, line)) {
+            for (char h : line) {
                 ch = h;
 
                 if (i == n) {
@@ -130,10 +130,10 @@ int solve() {
         }
 
         if ((g + 1) % 4 == 0) {
-            anss.pb(ans);
+            anss.pb (ans);
         }
 
-        rrr(two);
+        rrr (two);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -145,7 +145,7 @@ int solve() {
     // print (one);
 
     for (int i = 0; i < n; i++) {
-        for (auto &j: one) {
+        for (auto &j : one) {
             char ch = j[i];
 
             if (ch == 'O') {

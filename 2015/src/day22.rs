@@ -160,7 +160,7 @@ fn f(
             );
         }
         min_cost
-    }
+    };
 }
 
 fn part1n2(input_file: &String) -> (i32, i32) {

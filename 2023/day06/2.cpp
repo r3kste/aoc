@@ -28,39 +28,39 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
-    vii data(4);
+    vii data (4);
     int k = 0;
     int l = 0;
 
     if (input.is_open()) {
-        while (getline(input, line)) {
-            stringstream words(line);
+        while (getline (input, line)) {
+            stringstream words (line);
             string temp;
-            getline(words, temp, ' ');
+            getline (words, temp, ' ');
 
             if (temp == "Time:") {
-                while (getline(words, temp, ' ')) {
+                while (getline (words, temp, ' ')) {
                     while (temp.empty()) {
-                        getline(words, temp, ' ');
+                        getline (words, temp, ' ');
                     }
 
-                    if (isdigit(temp[0])) {
-                        data[k++].F = stoi(temp);
+                    if (isdigit (temp[0])) {
+                        data[k++].F = stoi (temp);
                     }
                 }
             } else if (temp == "Distance:") {
-                while (getline(words, temp, ' ')) {
+                while (getline (words, temp, ' ')) {
                     while (temp.empty()) {
-                        getline(words, temp, ' ');
+                        getline (words, temp, ' ');
                     }
 
-                    if (isdigit(temp[0])) {
-                        data[l++].S = stoi(temp);
+                    if (isdigit (temp[0])) {
+                        data[l++].S = stoi (temp);
                     }
                 }
             }
@@ -74,13 +74,13 @@ int solve() {
     string tt;
     string td;
 
-    for (auto &i: data) {
-        tt += (to_string(i.F));
-        td += (to_string(i.S));
+    for (auto &i : data) {
+        tt += (to_string (i.F));
+        td += (to_string (i.S));
     }
 
-    time = stoll(tt);
-    dist = stoll(td);
+    time = stoll (tt);
+    dist = stoll (td);
     ll j;
 
     for (j = time / 2; j >= 1; j--) {
@@ -93,7 +93,7 @@ int solve() {
 
     ll one = j;
     ll two = time - j;
-    cout << abs(two - one) - 1;
+    cout << abs (two - one) - 1;
     return 0;
 }
 

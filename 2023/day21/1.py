@@ -3,10 +3,10 @@ import os
 
 n = 131
 a = [["0" for i in range(n)] for j in range(n)]
-input = open(os.path.dirname(__file__) + "/input.txt", "r")
+input_file = open(os.path.dirname(__file__) + "/input.txt", "r")
 i = j = 0
 si = sj = 0
-for line in input:
+for line in input_file:
     for char in line:
         if char != "\n":
             a[i][j % n] = char
@@ -20,7 +20,9 @@ for line in input:
 a[si][sj] = "O"
 
 
-def step(garden=a, c=0):
+def step(garden=None, c=0):
+    if garden is None:
+        garden = a
     t = copy.deepcopy(garden)
     if c == 64:
         ans = 0

@@ -41,11 +41,11 @@ def poi(line1, line2):
                 and sb1 * y > sb1 * y1
                 and sb2 * y > sb2 * y2
         ):
-            return (x, y)
+            return x, y
         else:
-            return (0, 0)
+            return 0, 0
     else:
-        return (0, 0)
+        return 0, 0
 
 
 c = 0
@@ -56,6 +56,6 @@ for i in data:
     for j in data:
         if i < j:
             x, y = poi(i, j)
-            if x >= s and x <= e and y >= s and y <= e:
+            if s <= x <= e and s <= y <= e:
                 c += 1
 print(c)

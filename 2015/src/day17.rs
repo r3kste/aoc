@@ -23,7 +23,7 @@ fn combinations(
             &mut combination,
         );
         pick + unpick
-    }
+    };
 }
 
 fn part1n2(input_file: &String) -> (i32, i32) {

@@ -1,4 +1,5 @@
 use itertools::enumerate;
+
 fn part1(input_file: &String) -> i32 {
     const SIZE: usize = 1000000;
     let mut houses: Vec<usize> = vec![0; SIZE];

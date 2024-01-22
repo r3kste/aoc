@@ -28,53 +28,53 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     vector<pair<int, pair<string, int>>> p;
 
     if (input.is_open()) {
-        while (getline(input, line)) {
-            stringstream words(line);
+        while (getline (input, line)) {
+            stringstream words (line);
             string temp;
-            getline(words, temp, ' ');
+            getline (words, temp, ' ');
             string temp1;
 
             for (int i = 0; i < 5; i++) {
                 char ch = temp[i];
 
                 switch (ch) {
-                    case 'A':
-                        temp1 += "Z";
-                        break;
+                case 'A':
+                    temp1 += "Z";
+                    break;
 
-                    case 'K':
-                        temp1 += "Y";
-                        break;
+                case 'K':
+                    temp1 += "Y";
+                    break;
 
-                    case 'Q':
-                        temp1 += "X";
-                        break;
+                case 'Q':
+                    temp1 += "X";
+                    break;
 
-                    case 'J':
-                        temp1 += "1";
-                        break;
+                case 'J':
+                    temp1 += "1";
+                    break;
 
-                    case 'T':
-                        temp1 += "R";
-                        break;
+                case 'T':
+                    temp1 += "R";
+                    break;
 
-                    default:
-                        temp1 += (ch);
-                        break;
+                default:
+                    temp1 += (ch);
+                    break;
                 }
             }
 
             string temp2;
-            getline(words, temp2, ' ');
-            p.pb(mp(0, mp(temp1, stoi(temp2))));
+            getline (words, temp2, ' ');
+            p.pb (mp (0, mp (temp1, stoi (temp2))));
         }
 
         input.close();
@@ -94,15 +94,15 @@ int solve() {
         // int wow = freq[1];
         vi ff;
 
-        for (auto i: freq) {
+        for (auto i : freq) {
             if (i.F == '1') {
                 continue;
             }
 
-            ff.pb(i.S);
+            ff.pb (i.S);
         }
 
-        sort(all (ff));
+        sort (all (ff));
         int wow = freq['1'];
 
         if (!ff.empty()) {
@@ -111,7 +111,7 @@ int solve() {
             ff = vi{5};
         }
 
-        if (ff == vector<int>{5}) {
+        if (ff == vector<int> {5}) {
             p[i].F = 7;
         } else if (ff == vi{1, 4}) {
             p[i].F = 6;
@@ -130,7 +130,7 @@ int solve() {
         }
     }
 
-    sort(all (p));
+    sort (all (p));
     int c = 1;
     string score;
 

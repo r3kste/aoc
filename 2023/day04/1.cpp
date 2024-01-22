@@ -28,10 +28,10 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string word;
     bool flag = false;
     bool flag2 = false;
@@ -41,59 +41,59 @@ int solve() {
     ll sum = 0;
 
     if (input.is_open()) {
-        while (getline(input, word, ' ')) {
+        while (getline (input, word, ' ')) {
             while (word.empty()) {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
             }
 
             if (word == "Card") {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
             }
 
             while (word.empty()) {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
             }
 
             if (word[word.size() - 1] == ':') {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
                 flag = false;
             }
 
             while (word.empty()) {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
             }
 
             if (word[word.size() - 1] == '|') {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
                 flag = true;
             }
 
             while (word.empty()) {
-                getline(input, word, ' ');
+                getline (input, word, ' ');
             }
 
-            if (word.find('\n') != string::npos) {
+            if (word.find ('\n') != string::npos) {
                 // word=word.substr(word.find("\n"),word.size()-word.find("\n"));
-                word = word.substr(0, word.find('\n'));
+                word = word.substr (0, word.find ('\n'));
                 flag2 = true;
             }
 
             if (flag) {
-                b.pb(stoi(word));
+                b.pb (stoi (word));
             } else {
-                a.pb(stoi(word));
+                a.pb (stoi (word));
             }
 
             if (flag2) {
-                for (int i: a) {
-                    for (int j: b) {
+                for (int i : a) {
+                    for (int j : b) {
                         if (i == j) {
                             c++;
                         }
                     }
                 }
 
-                sum += ll(pow(2, c - 1));
+                sum += ll (pow (2, c - 1));
                 a.clear();
                 b.clear();
                 flag2 = false;

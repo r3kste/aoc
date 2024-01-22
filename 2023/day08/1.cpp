@@ -28,40 +28,40 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
-    getline(input, line);
+    getline (input, line);
     vector<char> instructions;
 
-    for (char i: line) {
-        instructions.pb(i);
+    for (char i : line) {
+        instructions.pb (i);
     }
 
-    getline(input, line);
+    getline (input, line);
     map<string, pair<string, string>> p;
 
     if (input.is_open()) {
-        while (getline(input, line)) {
-            stringstream words(line);
+        while (getline (input, line)) {
+            stringstream words (line);
             string word;
-            getline(words, word, ' ');
+            getline (words, word, ' ');
             string FF;
 
-            if (isalpha(word[0])) {
+            if (isalpha (word[0])) {
                 FF = word;
             }
 
-            getline(words, word, ' ');
-            getline(words, word, ' ');
-            word = word.substr(1, 3);
+            getline (words, word, ' ');
+            getline (words, word, ' ');
+            word = word.substr (1, 3);
             string SF = word;
-            getline(words, word, ' ');
-            word = word.substr(0, 3);
+            getline (words, word, ' ');
+            word = word.substr (0, 3);
             string SS = word;
-            p[FF] = mp(SF, SS);
+            p[FF] = mp (SF, SS);
         }
 
         input.close();

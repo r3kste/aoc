@@ -35,7 +35,7 @@ fn next_password(password: &mut Vec<char>, index: usize) -> Vec<char> {
     } else {
         password[index] = 'a';
         next_password(password, index - 1)
-    }
+    };
 }
 
 fn part1n2(input_file: &String) -> (String, String) {

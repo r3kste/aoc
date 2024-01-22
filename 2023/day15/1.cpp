@@ -29,23 +29,23 @@ int solve() {
     fastio
     ll val;
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     ll ans = 0;
 
     if (input.is_open()) {
-        getline(input, line);
-        stringstream words(line);
+        getline (input, line);
+        stringstream words (line);
         string subword;
 
-        while (getline(words, subword, ',')) {
+        while (getline (words, subword, ',')) {
             val = 0;
 
-            for (auto i: subword) {
-                val += int(i);
+            for (auto i : subword) {
+                val += int (i);
                 val *= 17;
                 val %= 256;
             }

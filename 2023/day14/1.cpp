@@ -28,23 +28,23 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     int n = 10;
     n *= 10;
-    vector<vector<char>> one(n, vector<char>(n, '.'));
-    vector<vector<char>> two(n, vector<char>(n, '.'));
+    vector<vector<char>> one (n, vector<char> (n, '.'));
+    vector<vector<char>> two (n, vector<char> (n, '.'));
 
     if (input.is_open()) {
         char ch;
         int i = 0;
         int j = 0;
 
-        while (getline(input, line)) {
-            for (char h: line) {
+        while (getline (input, line)) {
+            for (char h : line) {
                 ch = h;
 
                 if (i == n) {

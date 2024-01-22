@@ -1,5 +1,6 @@
-import numpy as np
 import os
+
+import numpy as np
 
 input_file = open(os.path.dirname(__file__) + "/input.txt", "r")
 cubes = {}

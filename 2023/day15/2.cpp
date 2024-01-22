@@ -29,20 +29,20 @@ int solve() {
     fastio
     ll val;
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     ll ans = 0;
-    vector<vector<pair<string, int>>> p(256, vector<pair<string, int>>(0, mp("", 0)));
+    vector<vector<pair<string, int>>> p (256, vector<pair<string, int>> (0, mp ("", 0)));
 
     if (input.is_open()) {
-        getline(input, line);
-        stringstream words(line);
+        getline (input, line);
+        stringstream words (line);
         string subword;
 
-        while (getline(words, subword, ',')) {
+        while (getline (words, subword, ',')) {
             string label;
             int op = 0;
             int foc = 0;
@@ -55,7 +55,7 @@ int solve() {
                     break;
                 } else if (i == '=') {
                     op = 1;
-                    foc = (subword[j + 1]) - int('0');
+                    foc = (subword[j + 1]) - int ('0');
                     break;
                 } else {
                     label += (i);
@@ -64,8 +64,8 @@ int solve() {
 
             val = 0;
 
-            for (auto i: label) {
-                val += int(i);
+            for (auto i : label) {
+                val += int (i);
                 val *= 17;
                 val %= 256;
             }
@@ -75,7 +75,7 @@ int solve() {
                 vector<pair<string, int>> t;
 
                 // for (auto i : p[val])
-                for (auto &j: p[val]) {
+                for (auto &j : p[val]) {
                     auto i = j;
 
                     if (i.F == label) {
@@ -86,14 +86,14 @@ int solve() {
                 }
 
                 if (flag) {
-                    p[val].pb(mp(label, foc));
+                    p[val].pb (mp (label, foc));
                 }
             } else if (op == -1) {
                 vector<pair<string, int>> t;
 
-                for (const auto &i: p[val]) {
+                for (const auto &i : p[val]) {
                     if (i.F != label) {
-                        t.pb(mp(i.F, i.S));
+                        t.pb (mp (i.F, i.S));
                     }
                 }
 

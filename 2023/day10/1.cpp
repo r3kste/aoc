@@ -28,17 +28,17 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     // int c = 5;
     // int r = 5;
     int c = 140;
     int r = 140;
-    vector<vector<char>> inp(r, vector<char>(c, '.'));
-    vector<vector<int>> dist(r, vector<int>(c, 0));
+    vector<vector<char>> inp (r, vector<char> (c, '.'));
+    vector<vector<int>> dist (r, vector<int> (c, 0));
     int starti, startj;
 
     if (input.is_open()) {
@@ -46,8 +46,8 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while (getline(input, line)) {
-            for (char h: line) {
+        while (getline (input, line)) {
+            for (char h : line) {
                 ch = h;
 
                 if (i == r) {
@@ -83,7 +83,7 @@ int solve() {
     k = 1;
     char from = 'l';
 
-    while (!(i == starti && j == startj)) {
+    while (! (i == starti && j == startj)) {
         char pos = inp[i][j];
         dist[i][j] = k++;
 
@@ -140,9 +140,9 @@ int solve() {
     k = 1;
     from = 'u';
 
-    while (!(i == starti && j == startj)) {
+    while (! (i == starti && j == startj)) {
         char pos = inp[i][j];
-        dist[i][j] = min(k++, dist[i][j]);
+        dist[i][j] = min (k++, dist[i][j]);
 
         if (from == 'l') {
             if (pos == '-') {

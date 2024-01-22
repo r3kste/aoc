@@ -28,39 +28,39 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
-    vii data(4);
+    vii data (4);
     int k = 0;
     int l = 0;
 
     if (input.is_open()) {
-        while (getline(input, line)) {
-            stringstream words(line);
+        while (getline (input, line)) {
+            stringstream words (line);
             string temp;
-            getline(words, temp, ' ');
+            getline (words, temp, ' ');
 
             if (temp == "Time:") {
-                while (getline(words, temp, ' ')) {
+                while (getline (words, temp, ' ')) {
                     while (temp.empty()) {
-                        getline(words, temp, ' ');
+                        getline (words, temp, ' ');
                     }
 
-                    if (isdigit(temp[0])) {
-                        data[k++].F = stoi(temp);
+                    if (isdigit (temp[0])) {
+                        data[k++].F = stoi (temp);
                     }
                 }
             } else if (temp == "Distance:") {
-                while (getline(words, temp, ' ')) {
+                while (getline (words, temp, ' ')) {
                     while (temp.empty()) {
-                        getline(words, temp, ' ');
+                        getline (words, temp, ' ');
                     }
 
-                    if (isdigit(temp[0])) {
-                        data[l++].S = stoi(temp);
+                    if (isdigit (temp[0])) {
+                        data[l++].S = stoi (temp);
                     }
                 }
             }
@@ -71,7 +71,7 @@ int solve() {
 
     ll p = 1;
 
-    for (auto &i: data) {
+    for (auto &i : data) {
         int a = i.F;
         int b = i.S;
         int j;

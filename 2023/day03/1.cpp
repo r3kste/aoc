@@ -28,14 +28,14 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     int c = 140;
     int r = 140;
-    vector<vector<char>> inp(r, vector<char>(c, '.'));
+    vector<vector<char>> inp (r, vector<char> (c, '.'));
     ll sum = 0;
 
     if (input.is_open()) {
@@ -43,8 +43,8 @@ int solve() {
         int i = 0;
         int j = 0;
 
-        while (getline(input, line)) {
-            for (char h: line) {
+        while (getline (input, line)) {
+            for (char h : line) {
                 ch = h;
 
                 if (i == r) {
@@ -81,7 +81,7 @@ int solve() {
 
                 if (ch >= 48 && ch <= 57) {
                     for (k = j + 1; k < c; k++) {
-                        if (!(inp[i][k] >= 48 && inp[i][k] <= 57)) {
+                        if (! (inp[i][k] >= 48 && inp[i][k] <= 57)) {
                             k--;
                             break;
                         } else {
@@ -94,18 +94,18 @@ int solve() {
                     int top = i - 1;
                     int bot = i + 1;
 
-                    for (int l = max(0, top); l <= min(bot, r - 1); l++) {
-                        for (int m = max(0, left); m <= min(right, c - 1); m++) {
+                    for (int l = max (0, top); l <= min (bot, r - 1); l++) {
+                        for (int m = max (0, left); m <= min (right, c - 1); m++) {
                             if (l == top || l == bot || m == left || m == right) {
-                                if (inp[l][m] != '.' && !(inp[l][m] >= 48 && inp[l][m] <= 57)) {
-                                    sum += stoi(temp);
+                                if (inp[l][m] != '.' && ! (inp[l][m] >= 48 && inp[l][m] <= 57)) {
+                                    sum += stoi (temp);
                                     goto labellesgo;
                                 }
                             }
                         }
                     }
 
-                    labellesgo:
+labellesgo:
                     j = k + 1;
                 }
             }

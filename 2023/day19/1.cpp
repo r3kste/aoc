@@ -28,10 +28,10 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     bool flag = true;
     map<string, vector<pair<pair<pair<char, char>, int>, string>>> p;
@@ -40,29 +40,29 @@ int solve() {
     ll ans = 0;
 
     if (input.is_open()) {
-        while (getline(input, line)) {
+        while (getline (input, line)) {
             if (line.empty()) {
-                getline(input, line);
+                getline (input, line);
                 flag = false;
             }
 
             if (flag) {
-                string workflow = line.substr(0, line.find('{'));
-                line = line.substr(line.find('{') + 1, line.find('}') - workflow.size() - 1);
-                stringstream operations(line);
+                string workflow = line.substr (0, line.find ('{'));
+                line = line.substr (line.find ('{') + 1, line.find ('}') - workflow.size() - 1);
+                stringstream operations (line);
                 string operation;
 
-                while (getline(operations, operation, ',')) {
+                while (getline (operations, operation, ',')) {
                     char quantity, ineq;
                     string num, target;
                     ll number;
 
-                    if (operation.size() > 1 && isdigit(operation[2])) {
+                    if (operation.size() > 1 && isdigit (operation[2])) {
                         quantity = operation[0];
                         ineq = operation[1];
-                        num = operation.substr(2, operation.find(':') - 2);
-                        number = stoll(num);
-                        target = operation.substr(operation.find(':') + 1, operation.size() - 3 - num.size());
+                        num = operation.substr (2, operation.find (':') - 2);
+                        number = stoll (num);
+                        target = operation.substr (operation.find (':') + 1, operation.size() - 3 - num.size());
                     } else {
                         quantity = ' ';
                         ineq = ' ';
@@ -70,21 +70,21 @@ int solve() {
                         target = operation;
                     }
 
-                    p[workflow].pb(mp(mp(mp(quantity, ineq), number), target));
+                    p[workflow].pb (mp (mp (mp (quantity, ineq), number), target));
                 }
             } else {
-                line = line.substr(1, line.size() - 2);
-                stringstream data(line);
+                line = line.substr (1, line.size() - 2);
+                stringstream data (line);
                 string detes;
                 char quantity, ineq;
                 string num, target, workflow;
                 ll number, sum = 0;
                 map<char, int> q;
 
-                while (getline(data, detes, ',')) {
+                while (getline (data, detes, ',')) {
                     quantity = detes[0];
-                    num = detes.substr(2, detes.size() - 2);
-                    number = stoll(num);
+                    num = detes.substr (2, detes.size() - 2);
+                    number = stoll (num);
                     sum += number;
                     q[quantity] = number;
                 }
@@ -100,37 +100,8 @@ int solve() {
                     target = i.S;
 
                     switch (ineq) {
-                        case '<':
-                            if (q[quantity] < number) {
-                                if (target == "A") {
-                                    ans += sum;
-                                    j = p[workflow].size();
-                                } else if (target == "R") {
-                                    j = p[workflow].size();
-                                } else {
-                                    workflow = target;
-                                    j = -1;
-                                }
-                            }
-
-                            break;
-
-                        case '>':
-                            if (q[quantity] > number) {
-                                if (target == "A") {
-                                    ans += sum;
-                                    j = p[workflow].size();
-                                } else if (target == "R") {
-                                    j = p[workflow].size();
-                                } else {
-                                    workflow = target;
-                                    j = -1;
-                                }
-                            }
-
-                            break;
-
-                        case ' ':
+                    case '<':
+                        if (q[quantity] < number) {
                             if (target == "A") {
                                 ans += sum;
                                 j = p[workflow].size();
@@ -140,9 +111,38 @@ int solve() {
                                 workflow = target;
                                 j = -1;
                             }
+                        }
 
-                        default:
-                            break;
+                        break;
+
+                    case '>':
+                        if (q[quantity] > number) {
+                            if (target == "A") {
+                                ans += sum;
+                                j = p[workflow].size();
+                            } else if (target == "R") {
+                                j = p[workflow].size();
+                            } else {
+                                workflow = target;
+                                j = -1;
+                            }
+                        }
+
+                        break;
+
+                    case ' ':
+                        if (target == "A") {
+                            ans += sum;
+                            j = p[workflow].size();
+                        } else if (target == "R") {
+                            j = p[workflow].size();
+                        } else {
+                            workflow = target;
+                            j = -1;
+                        }
+
+                    default:
+                        break;
                     }
                 }
             }

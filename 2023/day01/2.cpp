@@ -27,39 +27,40 @@ typedef vector<long long int> vll;
 int solve() {
     fastio
     ifstream input;
-    std::filesystem::path path(__FILE__);
+    std::filesystem::path path (__FILE__);
     path = path.parent_path();
     path /= "input.txt";
-    input.open(path);
+    input.open (path);
     string line;
     ll sum = 0;
     vector<pair<string, string>> e = {{"one",   "o1e"},
-                                      {"two",   "t2o"},
-                                      {"three", "t3e"},
-                                      {"four",  "f4r"},
-                                      {"five",  "f5e"},
-                                      {"six",   "s6x"},
-                                      {"seven", "s7n"},
-                                      {"eight", "e8t"},
-                                      {"nine",  "n9e"}};
+        {"two",   "t2o"},
+        {"three", "t3e"},
+        {"four",  "f4r"},
+        {"five",  "f5e"},
+        {"six",   "s6x"},
+        {"seven", "s7n"},
+        {"eight", "e8t"},
+        {"nine",  "n9e"}
+    };
 
     if (input.is_open()) {
-        while (getline(input, line)) {
-            for (auto &i: e) {
-                while (line.find(i.F) != string::npos) {
-                    line.replace(line.find(i.F), i.F.size(), i.S);
+        while (getline (input, line)) {
+            for (auto &i : e) {
+                while (line.find (i.F) != string::npos) {
+                    line.replace (line.find (i.F), i.F.size(), i.S);
                 }
             }
 
-            for (auto &i: e) {
-                while (line.find(i.F) != string::npos) {
-                    line.replace(line.find(i.F), i.F.size(), i.S);
+            for (auto &i : e) {
+                while (line.find (i.F) != string::npos) {
+                    line.replace (line.find (i.F), i.F.size(), i.S);
                 }
             }
 
-            for (auto &i: e) {
-                while (line.find(i.F) != string::npos) {
-                    line.replace(line.find(i.F), i.F.size(), i.S);
+            for (auto &i : e) {
+                while (line.find (i.F) != string::npos) {
+                    line.replace (line.find (i.F), i.F.size(), i.S);
                 }
             }
 
@@ -67,14 +68,14 @@ int solve() {
             int b = 0;
             bool flag = true;
 
-            for (char i: line) {
-                if (int(i) >= 48 && int(i) <= 57) {
+            for (char i : line) {
+                if (int (i) >= 48 && int (i) <= 57) {
                     if (flag) {
-                        a = int(i) - 48;
+                        a = int (i) - 48;
                         b = a;
                         flag = false;
                     } else {
-                        b = int(i) - 48;
+                        b = int (i) - 48;
                     }
                 }
             }

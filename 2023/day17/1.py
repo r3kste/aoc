@@ -1,8 +1,8 @@
 import heapq
 import os
 
-input = open(os.path.dirname(__file__) + "/input.txt", "r")
-a = [list(map(int, line.strip())) for line in input]
+input_file = open(os.path.dirname(__file__) + "/input.txt", "r")
+a = [list(map(int, line.strip())) for line in input_file]
 n = len(a)
 
 done = set()
